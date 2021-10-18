@@ -1,0 +1,50 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://art/player.glb" type="PackedScene" id=1]
+[ext_resource path="res://Player.gd" type="Script" id=2]
+[ext_resource path="res://art/body.material" type="Material" id=3]
+[ext_resource path="res://art/mob_eye.material" type="Material" id=4]
+[ext_resource path="res://art/mob_body.material" type="Material" id=5]
+
+[sub_resource type="CubeMesh" id=2]
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SphereMesh" id=3]
+
+[sub_resource type="PrismMesh" id=4]
+
+[sub_resource type="SphereShape" id=1]
+radius = 0.804234
+
+[node name="Player" type="KinematicBody"]
+collision_layer = 2
+script = ExtResource( 2 )
+
+[node name="Pivot" type="Spatial" parent="."]
+
+[node name="Character" parent="Pivot" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.372273, 0 )
+
+[node name="player_cube" type="MeshInstance" parent="Pivot/Character"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0915456, 2.18056 )
+visible = false
+mesh = SubResource( 2 )
+material/0 = ExtResource( 3 )
+
+[node name="player_ball" type="MeshInstance" parent="Pivot/Character"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 2.00858 )
+visible = false
+mesh = SubResource( 3 )
+material/0 = ExtResource( 4 )
+
+[node name="player_triangle" type="MeshInstance" parent="Pivot/Character"]
+transform = Transform( 0.5, 0, 0, 0, -0.0192899, 0.499628, 0, -0.499628, -0.0192899, 0, -2.98023e-08, 1.73754 )
+visible = false
+mesh = SubResource( 4 )
+material/0 = ExtResource( 5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.782032, 0 )
+shape = SubResource( 1 )
+
+[editable path="Pivot/Character"]
